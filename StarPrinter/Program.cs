@@ -13,15 +13,21 @@ namespace StarPrinter
             Console.Write("Enter the maximum number of stars: ");
             maximum = Int32.Parse(Console.ReadLine());
 
-            CreatePattern(minimum, maximum);
-            InvertPattern(minimum, maximum);
+            int upper_stars = CreatePattern(minimum, maximum);
+            int reverse_stars = InvertPattern(minimum, maximum);
+            int total_stars = upper_stars + reverse_stars;
+
+            string message = String.Format("The total number of stars printed is {0}", total_stars);
+
+            Console.WriteLine("\n" + message);
         }
 
-        private static void CreatePattern(int minimum, int maximum)
+        private static int CreatePattern(int minimum, int maximum)
         {
             int i, j;
             // number of spaces
             int space = maximum - 1;
+            int total = 0;
 
             for (i = minimum; i <= maximum; i++)
             {
@@ -33,19 +39,22 @@ namespace StarPrinter
                 for (j = 1; j <= i; j++)
                 {
                     Console.Write("* ");
+                    total += 1;
                 }
 
                 Console.WriteLine("");
                 space--;    /* decrement one space after one row*/
             }
+            return total;
         }
 
 
-        private static void InvertPattern(int minimum, int maximum)
+        private static int InvertPattern(int minimum, int maximum)
         {
             int i, j;
             // number of spaces
-            int space = 1;
+            int space = minimum;
+            int total = 0;
 
             for (i = maximum - 1; i >= minimum; i--)
             {
@@ -57,11 +66,13 @@ namespace StarPrinter
                 for (j = 1; j <= i; j++)
                 {
                     Console.Write("* ");
+                    total += 1;
                 }
 
                 Console.WriteLine("");
                 space++;
             }
+            return total;
         }
     }
 }
